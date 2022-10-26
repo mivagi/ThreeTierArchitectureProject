@@ -1,4 +1,7 @@
-﻿@{
+﻿@using DataLayer.Models
+@model IEnumerable<Category>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,3 +9,15 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+@foreach(var el in Model)
+{
+    <h2>@el.Name</h2>
+    <ul>
+        @if (el.Products != null)
+        {
+            @foreach(var item in el.Products){
+                <li>@item.Name @item.Price</li>
+            }
+        }
+    </ul>
+}

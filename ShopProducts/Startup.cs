@@ -1,3 +1,6 @@
+using BusinessLayer;
+using BusinessLayer.Interfaces;
+using BusinessLayer.Repositories;
 using DataLayer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,6 +27,9 @@ namespace ShopProducts
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<ICategories, CategoryRepository>();
+            services.AddTransient<IProducts, ProductRepository>();
+            services.AddScoped<DataManager>();
             services.AddDbContext<AppDbContent>(op => op.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("DataLayer")));
             services.AddControllersWithViews();
         }

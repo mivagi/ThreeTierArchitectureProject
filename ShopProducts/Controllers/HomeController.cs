@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BusinessLayer;
+using DataLayer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ShopProducts.Models;
 using System;
@@ -12,15 +14,16 @@ namespace ShopProducts.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly DataManager dataManager;
+        public HomeController(ILogger<HomeController> logger, DataManager dataManager)
         {
             _logger = logger;
+            this.dataManager = dataManager;
         }
 
         public IActionResult Index()
         {
-            return View();
+            return View(dataManager.Categories.AllCategories());
         }
 
         public IActionResult Privacy()
