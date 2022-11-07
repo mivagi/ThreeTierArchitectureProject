@@ -12,10 +12,12 @@ namespace PresentationLayer.Services
     public class CategoryService
     {
         private readonly DataManager dataManager;
+        private readonly ProductService productService;
 
         public CategoryService(DataManager dataManager)
         {
             this.dataManager = dataManager;
+            productService = new ProductService(dataManager);
         }
         public List<CategoryViewModel> CategoryListViewModel()
         {
@@ -31,9 +33,12 @@ namespace PresentationLayer.Services
         {
             var categoryDb = dataManager.Categories.GetOneCategory(id);
             var categoryViewModel = new CategoryViewModel();
-            categoryViewModel.Id = categoryDb.Id;
-            categoryViewModel.Name = categoryDb.Name;
             categoryViewModel.Category = categoryDb;
+            //var listProductViewModels = new List<ProductViewModel>();
+            foreach(var product in categoryDb.Products)
+            {
+                categoryViewModel.ListProductViewModels.Add(productService.ProductDbToViewModelById(product.Id));
+            }
             return categoryViewModel;
         }
         public CategoryEditModel GetCategoryEditModel(int id = 0)

@@ -21,7 +21,7 @@ namespace BusinessLayer.Repositories
         public IEnumerable<Category> AllCategories() => content.Categories.Include(p => p.Products).ToList();
         public Category GetOneCategory(int id)
         {
-            return content.Categories.FirstOrDefault(c => c.Id == id);
+            return content.Categories.Include(p => p.Products).FirstOrDefault(c => c.Id == id);
         }
         public void CreateCategory(Category category)
         {

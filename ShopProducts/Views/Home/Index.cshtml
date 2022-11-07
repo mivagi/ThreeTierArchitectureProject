@@ -1,5 +1,5 @@
-﻿@using DataLayer.Models
-@model IEnumerable<Category>
+﻿@using PresentationLayer.Models
+@model IEnumerable<CategoryViewModel>
 
 @{
     ViewData["Title"] = "Home Page";
@@ -11,12 +11,13 @@
 </div>
 @foreach(var el in Model)
 {
-    <h2>@el.Name</h2>
+    <h2>@el.Category.Name</h2>
     <ul>
-        @if (el.Products != null)
+        @if (el.ListProductViewModels != null)
         {
-            @foreach(var item in el.Products){
-                <li>@item.Name @item.Price</li>
+            @foreach (var item in el.ListProductViewModels)
+            {
+                <li>@item.Product.Name @item.Product.Price</li>
             }
         }
     </ul>

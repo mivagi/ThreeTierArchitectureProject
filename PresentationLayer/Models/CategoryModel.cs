@@ -14,13 +14,11 @@ namespace PresentationLayer.Models
     }
     public class CategoryViewModel
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
         public Category Category { get; set; }
-        public List<ProductViewModel> ProductViewModel { get; set; }
+        public List<ProductViewModel> ListProductViewModels { get; set; }
         public CategoryViewModel()
         {
-            ProductViewModel = new List<ProductViewModel>();
+            ListProductViewModels = new List<ProductViewModel>();
         }
     }
 }

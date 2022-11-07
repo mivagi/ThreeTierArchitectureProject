@@ -31,8 +31,6 @@ namespace PresentationLayer.Services
         {
             var categoryDb = dataManager.Products.GetOneProduct(id);
             var categoryViewModel = new ProductViewModel();
-            categoryViewModel.Id = categoryDb.Id;
-            categoryViewModel.Name = categoryDb.Name;
             categoryViewModel.Product = categoryDb;
             return categoryViewModel;
         }
@@ -49,6 +47,7 @@ namespace PresentationLayer.Services
                 productEditModel.Id = product.Id;
                 productEditModel.Name = product.Name;
                 productEditModel.Price = product.Price;
+                productEditModel.CategoryId = product.CategoryId;
                 return productEditModel;
             }
         }
@@ -65,6 +64,7 @@ namespace PresentationLayer.Services
             }
             product.Name = productEditModel.Name;
             product.Price = productEditModel.Price;
+            product.CategoryId = productEditModel.CategoryId;
             dataManager.Products.CreateProduct(product);
         }
     }
